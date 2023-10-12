@@ -4,9 +4,9 @@ import Pagination from '../pagination/Pagination'
 import Card from '../card/Card'
 import getBaseUrl from '@/helper/getBaseUrl'
 
-const getData = async (page) => {
+const getData = async (page, cat) => {
   const hostApi = getBaseUrl();
-  const res = await fetch(`${hostApi}/api/posts?page=${page}`, {
+  const res = await fetch(`${hostApi}/api/posts?page=${page}&cat=${cat || ""}`, {
     cache: "no-store"
   })
 
@@ -17,8 +17,8 @@ const getData = async (page) => {
   return res.json()
 }
 
-const CardList = async ({page}) => {
-  const {posts, count} = await getData(page)
+const CardList = async ({page, cat}) => {
+  const {posts, count} = await getData(page, cat)
   const POST_PER_PAGE = 2
   const hasPrev = POST_PER_PAGE * (page-1) > 0
   const hasNext = POST_PER_PAGE * (page-1) + POST_PER_PAGE < count
