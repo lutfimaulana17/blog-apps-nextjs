@@ -2,8 +2,23 @@ import React from 'react'
 import styles from './footer.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import getBaseUrl from '@/helper/getBaseUrl'
 
-const Footer = () => {
+const getData = async () => {
+  const hostApi = getBaseUrl();
+  const res = await fetch(`${hostApi}/api/categories`, {
+    cache: "no-store"
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed Request")
+  }
+
+  return res.json()
+}
+
+const Footer = async () => {
+  const data = await getData()
   return (
     <div className={styles.container}>
       <div className={styles.info}>
@@ -28,16 +43,12 @@ const Footer = () => {
         <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
           <Link href="/">Home</Link>
-          <Link href="/">Blog</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Tags</span>
-          <Link href="/">Style</Link>
-          <Link href="/">Fashion</Link>
-          <Link href="/">Coding</Link>
-          <Link href="/">Travel</Link>
+          {data?.map(item => (
+              <Link href={`/blog?cat=${item.slug}`} key={item._id} style={{ textTransform: 'capitalize' }}>{item.title}</Link>
+          ))}
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Social</span>

@@ -1,16 +1,28 @@
 import React from 'react'
 import styles from './menuCategories.module.css'
 import Link from 'next/link'
+import getBaseUrl from '@/helper/getBaseUrl'
 
-const MenuCategories = () => {
+const getData = async () => {
+  const hostApi = getBaseUrl();
+  const res = await fetch(`${hostApi}/api/categories`, {
+    cache: "no-store"
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed Request")
+  }
+
+  return res.json()
+}
+
+const MenuCategories = async () => {
+  const data = await getData()
   return (
     <div className={styles.categoryList}>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.style}`}>Style</Link>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.fashion}`}>Fashion</Link>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.food}`}>Food</Link>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.travel}`}>Travel</Link>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.culture}`}>Culture</Link>
-        <Link href="/blog?cat=style" className={`${styles.categoryItem} ${styles.coding}`}>Coding</Link>
+      {data?.map(item => (
+        <Link href={`/blog?cat=${item.slug}`} key={item._id} className={`${styles.categoryItem} ${styles[item.slug]}`}>{item.title}</Link>
+      ))}
     </div>
   )
 }
