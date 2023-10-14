@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import getBaseUrl from '@/helper/getBaseUrl'
 
+export const dynamic = 'force-dynamic'
+
 const getData = async () => {
   const hostApi = getBaseUrl();
   const res = await fetch(`${hostApi}/api/categories`, {

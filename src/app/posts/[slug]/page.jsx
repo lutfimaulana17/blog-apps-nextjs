@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Comments from '@/components/comments/Comments'
 import getBaseUrl from '@/helper/getBaseUrl'
 
+export const dynamic = 'force-dynamic'
+
 const getData = async (slug) => {
   const hostApi = getBaseUrl();
   const res = await fetch(`${hostApi}/api/posts/${slug}`, {

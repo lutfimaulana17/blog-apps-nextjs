@@ -6,6 +6,8 @@ import MenuPosts from '../menuPosts/MenuPosts'
 import MenuCategories from '../menuCategories/MenuCategories'
 import getBaseUrl from '@/helper/getBaseUrl'
 
+export const dynamic = 'force-dynamic'
+
 const getDataPopular = async () => {
   const hostApi = getBaseUrl();
   const res = await fetch(`${hostApi}/api/posts/popular`, {

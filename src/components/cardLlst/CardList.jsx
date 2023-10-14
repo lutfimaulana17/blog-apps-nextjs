@@ -4,6 +4,8 @@ import Pagination from '../pagination/Pagination'
 import Card from '../card/Card'
 import getBaseUrl from '@/helper/getBaseUrl'
 
+export const dynamic = 'force-dynamic'
+
 const getData = async (page, cat) => {
   const hostApi = getBaseUrl();
   const res = await fetch(`${hostApi}/api/posts?page=${page}&cat=${cat || ""}`, {
