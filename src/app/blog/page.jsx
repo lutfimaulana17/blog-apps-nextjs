@@ -3,6 +3,8 @@ import styles from './blogPage.module.css'
 import CardList from '@/components/cardLlst/CardList'
 import Menu from '@/components/menu/Menu'
 
+export const dynamic = 'force-dynamic'
+
 const BlogPage = ({searchParams}) => {
   const page = parseInt(searchParams.page) || 1
   const { cat } = searchParams
