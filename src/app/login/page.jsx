@@ -6,7 +6,7 @@ import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 const LoginPage = () => {
-  const {data, status} = useSession()
+  const { status } = useSession()
   const router = useRouter()
   
   if (status === "loading") {
