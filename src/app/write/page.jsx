@@ -73,7 +73,7 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
-    await fetch(`${hostApi}/api/posts`,{
+    await fetch(`/api/posts`,{
       method:"POST",
       body: JSON.stringify({ 
         title,

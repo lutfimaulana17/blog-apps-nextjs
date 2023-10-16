@@ -25,13 +25,13 @@ const Comments = ({postSlug}) => {
     const { status } = useSession()
     const hostApi = getBaseUrl();
     const {data, mutate, isLoading} = useSWR(
-        `${hostApi}/api/comments?postSlug=${postSlug}`,
+        `/api/comments?postSlug=${postSlug}`,
         fetcher
     )
     const [desc, setDesc] = useState('')
 
     const handleSubmit = async () => {
-        await fetch(`${hostApi}/api/comments`,{
+        await fetch(`/api/comments`,{
             method:"POST",
             body: JSON.stringify({ desc, postSlug })
         })
