@@ -48,7 +48,7 @@ const Footer = async () => {
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Tags</span>
-          {data?.map(item => (
+          {data && data.length && data.map(item => (
               <Link href={`/blog?cat=${item.slug}`} key={item._id} style={{ textTransform: 'capitalize' }}>{item.title}</Link>
           ))}
         </div>
