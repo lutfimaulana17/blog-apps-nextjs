@@ -34,9 +34,7 @@ const Featured = async () => {
          }
         <div className={styles.textContainer}>
           <h1 className={styles.postTitle}>{detail.title}</h1>
-          <p className={styles.postDesc}>
-            {detail.desc.substring(0, 205)}
-          </p>
+          <p className={styles.postDesc} dangerouslySetInnerHTML={{__html: detail?.desc.substring(0, 205)}} />
           <button className={styles.button}>
             <Link href={`/posts/${detail.slug}`}>
               Read More
